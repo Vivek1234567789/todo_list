@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .task-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #2d3436;
+            letter-spacing: 1px;
+        }
+
+        .task-container input[type="text"] {
+            width: calc(100% - 110px);
+            padding: 10px;
+            border: 2px solid #0984e3;
+            border-radius: 30px;
+            outline: none;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .task-container input[type="text"]:focus {
+            border-color: #6c5ce7;
+        }
+
+        .task-container button {
+            padding: 10px 20px;
+            background-color: #0984e3;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-container button:hover {
+            background-color: #6c5ce7;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        .task-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f2f6;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            color: #2d3436;
+        }
+
+        .task-list li button {
+            background-color: #d63031;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-list li button:hover {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task-container">
+        <h1>Task Manager</h1>
+
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Enter your task..." />
+            <button onclick="addTask()">Add Task</button>
+        </div>
+
+        <ul id="taskList" class="task-list"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskValue = taskInput.value.trim();
+
+            if (taskValue) {
+                const taskList = document.getElementById('taskList');
+
+                // Create list item
+                const listItem = document.createElement('li');
+                listItem.textContent = taskValue;
+
+                // Create delete button
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '&times;'; // Cross symbol
+                deleteButton.onclick = function() {
+                    taskList.removeChild(listItem);
+                };
+
+                // Append delete button to list item
+                listItem.appendChild(deleteButton);
+
+                // Append list item to task list
+                taskList.appendChild(listItem);
+
+                // Clear input field
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        }
+    </script>
+
+</body>
+</html>
